@@ -61,10 +61,10 @@ CREATE TABLE rechnung(
 );
 
 INSERT INTO Filiale (Filiale_plz, Filiale_Ort, Filiale_Strasse, Filiale_hausnr) VALUES 
- (21149, 'Hamburg', 'Cuxhavener Straße', 142),
- (10115, 'Berlin', 'Schwartzkopfstr.', 5),
- (70173, 'Stuttgart', 'Rhiemsweg', 57),
- (60306, 'Frankfurt', 'Warnstedtstrasse', 3);
+ (21149, 'Hamburg', 'Cuxhavener Straße', 50),
+ (10115, 'Berlin', 'Schwartzkopfstr.', 65),
+ (70173, 'Stuttgart', 'Reierweg', 157),
+ (60306, 'Frankfurt', 'Berliner Strasse', 23);
  
 INSERT INTO Abteilung (Abteilung_Name) VALUES 
  ('Entwicklung'),
