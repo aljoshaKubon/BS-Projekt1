@@ -1,0 +1,211 @@
+CREATE DATABASE scooteq
+
+CREATE TABLE Filiale(
+	Filiale_ID INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+	Filiale_plz VARCHAR(10),
+	Filiale_ort VARCHAR(30),
+	Filiale_strasse VARCHAR(30),
+	Filiale_hausnr INT
+);
+
+CREATE TABLE Abteilung(
+	Abteilung_ID INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+	Abteilung_Name VARCHAR(30)
+);
+
+CREATE TABLE mitarbeiter(
+	Mitarbeiter_ID INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+	Filiale_nr INT NOT NULL,
+	Abteilung_nr INT NOT NULL,
+	Mitarbeiter_name VARCHAR(15),
+	Mitarbeiter_vorname VARCHAR(15),
+	Mitarbeiter_alter INT,
+	mitarbeiter_job VARCHAR(30), 
+	mitarbeiter_pw VARCHAR(15),
+	FOREIGN KEY (Filiale_nr) REFERENCES Filiale(Filiale_ID), 
+	FOREIGN KEY (Abteilung_nr) REFERENCES Abteilung(Abteilung_ID)
+);
+
+CREATE TABLE scooter(
+	Scooter_ID INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+	Filiale_nr INT NOT NULL,
+	Scooter_Typ VARCHAR(20),
+	Scooter_pps DOUBLE,
+	Scooter_batterieladung INT,
+	Scooter_plz VARCHAR(5),
+	Scooter_ort VARCHAR(20),
+	Scooter_strasse VARCHAR(30),
+	Scooter_hausnr INT,
+	FOREIGN KEY (Filiale_nr) REFERENCES Filiale(filiale_id)
+);
+
+CREATE TABLE Kunde(
+	kunde_id INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+	kunde_name VARCHAR(20),
+	kunde_vorname VARCHAR(20),
+	kunde_plz VARCHAR(10),
+	kunde_strasse VARCHAR(30),
+	kunde_hausnr INT,
+	kunde_ort VARCHAR(30)
+);
+	
+CREATE TABLE rechnung(
+   rechnung_nr INT NOT NULL PRIMARY KEY AUTO_INCREMENT UNIQUE,
+	scooter_nr INT NOT NULL,
+	kunde_nr INT NOT NULL,
+	scooter_ausleihstart DATETIME,
+	scooter_ausleihende DATETIME, 
+	FOREIGN KEY (scooter_nr) REFERENCES scooter(scooter_id), 
+	FOREIGN KEY (kunde_nr) REFERENCES kunde(kunde_id), 
+	UNIQUE(scooter_nr, kunde_nr)
+);
+
+INSERT INTO Filiale (Filiale_plz, Filiale_Ort, Filiale_Strasse, Filiale_hausnr) VALUES 
+ (21149, 'Hamburg', 'Cuxhavener Straße', 142),
+ (10115, 'Berlin', 'Schwartzkopfstr.', 5),
+ (70173, 'Stuttgart', 'Rhiemsweg', 57),
+ (60306, 'Frankfurt', 'Warnstedtstrasse', 3);
+ 
+INSERT INTO Abteilung (Abteilung_Name) VALUES 
+ ('Entwicklung'),
+ ('Geschaeftsfuehrung'),
+ ('Marketing'),
+ ('Vertrieb'),
+ ('Human Resources und Finance');
+ 
+INSERT INTO mitarbeiter (Filiale_nr, Abteilung_nr, Mitarbeiter_name, Mitarbeiter_vorname, Mitarbeiter_alter, Mitarbeiter_job, Mitarbeiter_PW) VALUES
+ (1, 1, 'Kubon', 'Aljosha', 21, 'Entwickler', '12345'),
+ (2, 2, 'Gaeng', 'Florian', 29, 'Systemintegrator', 'test1'),
+ (3, 3, 'Raethjen', 'Jannik', 23, 'Entwickler', 'test2'),
+ (4, 4, 'Schoemer', 'Dennis', 25, 'Entwickler', '54321');
+ 
+INSERT INTO kunde (kunde_name, kunde_vorname, kunde_plz, kunde_strasse, kunde_hausnr, kunde_ort) VALUES
+ ('Mustermann', 'Max', 21137, 'Musterstr.', 1, 'Hamburg'),
+ ('Musterfrau', 'Luisa', 21137, 'Musterstr.', 5, 'Hamburg'), 
+ ('Vogel', 'Alex', 22137, 'Dieselstr.', 200, 'Hamburg'),
+ ('Mueller', 'Thomas', 10021, 'Hauptstr.', 32, 'Berlin'),
+ ('Uhse', 'Beate', 30021, 'Nebenstr.', 52, 'Frankfurt');
+ 
+INSERT INTO scooter (Filiale_nr, scooter_typ, scooter_pps, scooter_batterieladung, scooter_plz, scooter_ort, scooter_strasse, scooter_hausnr) VALUES
+(4, 'KQEI', 10.56, 81, 85809, 'Stuttgart', 'Musterstr.', 98),
+(1, 'JURU', 13.50, 84, 73440, 'Frankfurt', 'Musterstr.', 145),
+(3, 'OUOK', 13.54, 69, 15109, 'Berlin', 'Musterstr.', 50),
+(2, 'QJWY', 12.53, 55, 68000, 'Hamburg', 'Musterstr.', 137),
+(4, 'DPPD', 12.57, 50, 14686, 'Berlin', 'Musterstr.', 55),
+(2, 'TXLQ', 5.51, 95, 61977, 'Frankfurt', 'Musterstr.', 166),
+(1, 'XWW', 14.510, 95, 28645, 'Hamburg', 'Musterstr.', 6),
+(2, 'UJKV', 13.57, 60, 67345, 'Stuttgart', 'Musterstr.', 25),
+(2, 'VWQX', 7.56, 95, 36357, 'Frankfurt', 'Musterstr.', 68),
+(2, 'MHWL', 11.59, 57, 92429, 'Berlin', 'Musterstr.', 123),
+(3, 'GTHM', 14.57, 97, 59998, 'Hamburg', 'Musterstr.', 110),
+(4, 'JXD', 7.54, 60, 62523, 'Frankfurt', 'Musterstr.', 115),
+(4, 'XWCK', 7.52, 77, 33995, 'Berlin', 'Musterstr.', 102),
+(2, 'TKP', 14.56, 93, 26140, 'Hamburg', 'Musterstr.', 16),
+(4, 'UQTX', 7.55, 67, 92033, 'Hamburg', 'Musterstr.', 113),
+(3, 'EBY', 14.58, 52, 43245, 'Stuttgart', 'Musterstr.', 136),
+(2, 'YTJ', 10.59, 90, 15366, 'Berlin', 'Musterstr.', 194),
+(3, 'IXXT', 11.51, 70, 93639, 'Frankfurt', 'Musterstr.', 170),
+(4, 'RSSH', 6.51, 99, 49689, 'Stuttgart', 'Musterstr.', 112),
+(4, 'ODGI', 13.51, 66, 78366, 'Hamburg', 'Musterstr.', 182),
+(2, 'VAE', 13.58, 74, 23210, 'Hamburg', 'Musterstr.', 164),
+(4, 'JRG', 10.57, 99, 72347, 'Frankfurt', 'Musterstr.', 5),
+(3, 'HYYV', 13.54, 72, 91459, 'Frankfurt', 'Musterstr.', 115),
+(2, 'QMTQ', 6.52, 71, 42491, 'Frankfurt', 'Musterstr.', 32),
+(3, 'AWK', 10.510, 66, 41750, 'Hamburg', 'Musterstr.', 118),
+(1, 'OLJR', 7.54, 69, 50332, 'Hamburg', 'Musterstr.', 117),
+(1, 'TBYC', 13.57, 87, 11295, 'Frankfurt', 'Musterstr.', 119),
+(1, 'UNPX', 6.56, 79, 71921, 'Berlin', 'Musterstr.', 122),
+(4, 'AFF', 5.59, 59, 32536, 'Hamburg', 'Musterstr.', 76),
+(1, 'OTWH', 14.56, 79, 75428, 'Hamburg', 'Musterstr.', 85),
+(4, 'GJSH', 8.55, 87, 87063, 'Stuttgart', 'Musterstr.', 16),
+(1, 'SEIU', 13.58, 80, 28810, 'Hamburg', 'Musterstr.', 175),
+(2, 'HWA', 15.56, 51, 68927, 'Hamburg', 'Musterstr.', 157),
+(3, 'DRXY', 14.56, 81, 60279, 'Stuttgart', 'Musterstr.', 106),
+(3, 'NEU', 11.56, 53, 49342, 'Hamburg', 'Musterstr.', 130),
+(4, 'XKD', 10.52, 72, 18870, 'Frankfurt', 'Musterstr.', 139),
+(1, 'USU', 8.53, 98, 35840, 'Frankfurt', 'Musterstr.', 27),
+(3, 'PWR', 10.55, 70, 18504, 'Stuttgart', 'Musterstr.', 129),
+(1, 'KWE', 11.52, 85, 85160, 'Frankfurt', 'Musterstr.', 36),
+(1, 'CMI', 8.57, 73, 81314, 'Berlin', 'Musterstr.', 122),
+(4, 'PLA', 11.59, 76, 33249, 'Stuttgart', 'Musterstr.', 169),
+(4, 'IPQY', 7.52, 91, 35695, 'Berlin', 'Musterstr.', 81),
+(2, 'NESB', 7.56, 94, 40243, 'Frankfurt', 'Musterstr.', 29),
+(4, 'CLLA', 15.53, 76, 75240, 'Berlin', 'Musterstr.', 34),
+(1, 'GOHP', 11.52, 57, 34279, 'Hamburg', 'Musterstr.', 169),
+(2, 'SNO', 6.58, 94, 28718, 'Stuttgart', 'Musterstr.', 157),
+(4, 'HRFS', 5.52, 83, 65157, 'Berlin', 'Musterstr.', 168),
+(1, 'KFLF', 9.53, 51, 32956, 'Stuttgart', 'Musterstr.', 30),
+(3, 'AUDG', 12.54, 91, 21149, 'Stuttgart', 'Musterstr.', 79),
+(3, 'JVO', 14.55, 74, 12284, 'Berlin', 'Musterstr.', 184),
+(2, 'PRNB', 11.55, 98, 75217, 'Frankfurt', 'Musterstr.', 110),
+(1, 'NNN', 13.50, 82, 96117, 'Hamburg', 'Musterstr.', 105),
+(1, 'MSCY', 6.51, 78, 53962, 'Stuttgart', 'Musterstr.', 110),
+(2, 'RXF', 6.59, 65, 15599, 'Berlin', 'Musterstr.', 84),
+(4, 'JAI', 6.56, 66, 16095, 'Frankfurt', 'Musterstr.', 161),
+(2, 'NNFH', 5.52, 65, 95150, 'Frankfurt', 'Musterstr.', 25),
+(3, 'CEKQ', 9.510, 97, 53212, 'Frankfurt', 'Musterstr.', 23),
+(2, 'KRO', 8.54, 51, 89970, 'Frankfurt', 'Musterstr.', 140),
+(4, 'EJGC', 15.51, 57, 79694, 'Berlin', 'Musterstr.', 27),
+(4, 'ENJS', 9.57, 90, 60008, 'Frankfurt', 'Musterstr.', 15),
+(2, 'RPU', 10.52, 53, 40659, 'Stuttgart', 'Musterstr.', 103),
+(2, 'APT', 12.54, 66, 97473, 'Stuttgart', 'Musterstr.', 4),
+(2, 'RKGO', 11.54, 98, 42073, 'Berlin', 'Musterstr.', 135),
+(3, 'ENB', 11.54, 76, 89199, 'Hamburg', 'Musterstr.', 38),
+(4, 'NIH', 6.59, 99, 12937, 'Frankfurt', 'Musterstr.', 110),
+(3, 'UUF', 13.54, 79, 21611, 'Frankfurt', 'Musterstr.', 172),
+(3, 'GODU', 15.59, 63, 14182, 'Stuttgart', 'Musterstr.', 20),
+(1, 'VUQ', 15.54, 58, 19580, 'Berlin', 'Musterstr.', 96),
+(3, 'CGVU', 6.51, 99, 42979, 'Frankfurt', 'Musterstr.', 100),
+(2, 'GEYJ', 12.510, 76, 98311, 'Berlin', 'Musterstr.', 58),
+(1, 'VNT', 10.53, 77, 52403, 'Hamburg', 'Musterstr.', 11),
+(4, 'CTV', 9.58, 50, 70807, 'Berlin', 'Musterstr.', 86),
+(1, 'LCV', 13.54, 79, 18761, 'Frankfurt', 'Musterstr.', 64),
+(2, 'FWUW', 8.59, 76, 40609, 'Frankfurt', 'Musterstr.', 12),
+(3, 'WNRE', 6.55, 66, 53383, 'Berlin', 'Musterstr.', 197),
+(1, 'JGRY', 7.56, 78, 52727, 'Stuttgart', 'Musterstr.', 18),
+(3, 'DSUS', 10.56, 53, 51935, 'Hamburg', 'Musterstr.', 75),
+(3, 'NVA', 9.50, 79, 37174, 'Stuttgart', 'Musterstr.', 31),
+(2, 'QDP', 6.56, 55, 22038, 'Hamburg', 'Musterstr.', 181),
+(1, 'KSI', 7.58, 68, 40740, 'Frankfurt', 'Musterstr.', 183),
+(1, 'HFL', 11.58, 68, 66641, 'Berlin', 'Musterstr.', 24),
+(1, 'IOCW', 13.51, 77, 24210, 'Hamburg', 'Musterstr.', 140),
+(2, 'HDAA', 12.59, 76, 36562, 'Berlin', 'Musterstr.', 26),
+(3, 'UIN', 15.51, 59, 32658, 'Berlin', 'Musterstr.', 175),
+(1, 'SHC', 10.55, 80, 11555, 'Hamburg', 'Musterstr.', 54),
+(1, 'XIV', 14.55, 88, 72466, 'Frankfurt', 'Musterstr.', 194),
+(3, 'AYSF', 12.51, 84, 74813, 'Stuttgart', 'Musterstr.', 86),
+(2, 'RXRP', 14.50, 89, 31739, 'Berlin', 'Musterstr.', 85),
+(3, 'RVFH', 13.55, 91, 28626, 'Stuttgart', 'Musterstr.', 8),
+(3, 'NRQM', 12.53, 92, 71721, 'Hamburg', 'Musterstr.', 106),
+(1, 'KGM', 12.56, 73, 57848, 'Frankfurt', 'Musterstr.', 107),
+(1, 'LXEL', 8.54, 79, 70640, 'Stuttgart', 'Musterstr.', 7),
+(3, 'QBJB', 11.51, 57, 56173, 'Frankfurt', 'Musterstr.', 168),
+(4, 'BVI', 15.55, 56, 97387, 'Stuttgart', 'Musterstr.', 141),
+(4, 'ILUO', 13.55, 74, 31175, 'Stuttgart', 'Musterstr.', 112),
+(4, 'CLY', 12.55, 93, 23367, 'Stuttgart', 'Musterstr.', 23),
+(2, 'WNA', 12.58, 67, 57729, 'Berlin', 'Musterstr.', 139),
+(1, 'NSJA', 9.57, 60, 52050, 'Stuttgart', 'Musterstr.', 39),
+(4, 'CQAK', 7.54, 77, 89613, 'Hamburg', 'Musterstr.', 171),
+(3, 'RJT', 8.55, 98, 79382, 'Hamburg', 'Musterstr.', 99);
+
+
+INSERT INTO rechnung (scooter_nr, kunde_nr, scooter_ausleihstart, scooter_ausleihende) VALUES 
+ (20, 1, '2019-03-18 10:30:00 AM', '2019-03-18 10:30:00 AM'),
+ (33, 2, '2019-03-18 12:30:00 AM', '2019-03-18 15:30:00 AM'),
+ (11, 1, '2019-03-18 15:30:00 AM', '2019-03-18 17:30:00 AM'),
+ (15, 1, '2019-03-18 08:30:00 AM', '2019-03-18 09:20:00 AM');
+ 
+INSERT INTO rechnung(scooter_nr, kunde_nr, scooter_ausleihstart) VALUES
+ (25, 3, '2019-04-18 10:30:00 AM'),
+ (40, 2, '2019-03-18 12:30:00 AM'),
+ (16, 4, '2019-04-18 15:30:00 AM'),
+ (8, 1, '2019-05-08 08:30:00 AM');
+ 
+SELECT * FROM rechnung WHERE scooter_ausleihende IS NULL
+
+SELECT scooter.Scooter_ID, rechnung.kunde_nr, rechnung.scooter_ausleihstart, rechnung.scooter_ausleihende, TIMESTAMPDIFF(HOUR, rechnung.scooter_ausleihstart, rechnung.scooter_ausleihende) AS Dauer, scooter.Scooter_plz, scooter.Scooter_ort, scooter.Scooter_strasse, scooter.Scooter_hausnr
+FROM scooter
+INNER JOIN rechnung ON scooter.Scooter_ID=rechnung.scooter_nr
+WHERE scooter_ausleihende IS NULL
+
+SELECT * FROM rechnung
