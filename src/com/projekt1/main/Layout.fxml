@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="910.0" prefWidth="1251.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.projekt1.main.MainController">
+  <children>
+    <MenuBar layoutX="0.0" layoutY="0.0" prefWidth="1251.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <TabPane layoutX="0.0" layoutY="24.0" prefHeight="894.0" prefWidth="1259.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab text="Database">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="724.0" prefWidth="1251.0">
+              <children>
+                <TableView fx:id="tableView" editable="false" layoutX="0.0" layoutY="145.0" prefHeight="719.0" prefWidth="1259.0000999999975" tableMenuButtonVisible="false" />
+                <Button fx:id="showScooter" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#showScooter" text="Zeige Scooter">
+                  <font>
+                    <Font name="Comic Sans MS" size="12.0" fx:id="x3" />
+                  </font>
+                </Button>
+                <CheckBox id="not" fx:id="onlyLoanedCheckBox" font="$x3" layoutX="15.0" layoutY="45.0" mnemonicParsing="false" selected="true" text="nur ausgeliehen" underline="false" />
+                <Separator layoutX="200.0" layoutY="15.0" orientation="VERTICAL" prefHeight="104.0" />
+                <Button fx:id="showBill" font="$x3" layoutX="215.0" layoutY="15.0" mnemonicParsing="false" onAction="#showBill" text="Zeige Rechnungen" />
+                <Separator layoutX="400.0" layoutY="15.0" orientation="VERTICAL" prefHeight="104.0" />
+                <Button id="show" fx:id="showBranch" font="$x3" layoutX="415.0" layoutY="14.0" mnemonicParsing="false" onAction="#showBranch" text="Zeige Filialen" />
+                <CheckBox id="not" fx:id="yetLoanedCheckBox" font="$x3" layoutX="215.0" layoutY="45.0" mnemonicParsing="false" selected="false" text="noch ausgeliehen" underline="false" />
+                <CheckBox id="not" fx:id="detailsCheckBox" font="$x3" layoutX="215.0" layoutY="67.0" mnemonicParsing="false" selected="false" text="Details" underline="false" />
+                <Separator layoutX="600.0" layoutY="15.0" orientation="VERTICAL" prefHeight="104.0" />
+                <Button fx:id="showCostumers" font="$x3" layoutX="615.0" layoutY="15.0" mnemonicParsing="false" onAction="#showCostumers" text="Zeige Kunden" />
+                <Separator layoutX="800.0" layoutY="15.0" orientation="VERTICAL" prefHeight="104.0" />
+                <TextArea fx:id="queryTextArea" layoutX="894.0" layoutY="15.0" prefHeight="104.0" prefWidth="351.0" wrapText="true" />
+                <Button id="queryButton" fx:id="showQuery" font="$x3" layoutX="815.0" layoutY="15.0" mnemonicParsing="false" onAction="#showQuery" text="Abfrage" textAlignment="LEFT" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Profile">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" blendMode="SRC_OVER" fill="#667eff" height="863.0" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeLineCap="SQUARE" strokeLineJoin="MITER" strokeType="OUTSIDE" width="255.0" />
+                <ImageView fitHeight="227.0" fitWidth="227.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="file:/C:/Users/Joshi/Desktop/Berufsschule/Projekte/01%20-%20E-Scooter/jonny.jpeg" />
+                  </image>
+                </ImageView>
+                <Label layoutX="15.0" layoutY="330.0" text="Name:">
+                  <font>
+                    <Font name="Comic Sans MS Bold" size="16.0" fx:id="x1" />
+                  </font>
+                </Label>
+                <Label font="$x1" layoutX="15.0" layoutY="250.0" text="ID:" />
+                <Label font="$x1" layoutX="15.0" layoutY="370.0" text="Alter:" />
+                <Label font="$x1" layoutX="15.0" layoutY="410.0" text="Job:" />
+                <Label font="$x1" layoutX="15.0" layoutY="450.0" text="Abteilung:" />
+                <Label fx:id="labelName" layoutX="130.0" layoutY="330.0" text="Name">
+                  <font>
+                    <Font name="Comic Sans MS Bold Italic" size="16.0" fx:id="x2" />
+                  </font>
+                  <textFill>
+                    <Color blue="0.286" green="0.000" red="0.400" fx:id="x4" />
+                  </textFill>
+                </Label>
+                <Label fx:id="labelAge" font="$x2" layoutX="130.0" layoutY="370.0" text="Alter" textFill="$x4" />
+                <Label fx:id="labelJob" font="$x2" layoutX="130.0" layoutY="410.0" text="Job" textFill="$x4" />
+                <Label fx:id="labelDepartment" font="$x2" layoutX="130.0" layoutY="450.0" text="Abteilung" textFill="$x4" />
+                <Label fx:id="labelID" font="$x2" layoutX="130.0" layoutY="250.0" text="ID" textFill="$x4" />
+                <Label font="$x1" layoutX="15.0" layoutY="290.0" text="Vorname:" />
+                <Label id="labelName" fx:id="labelPrename" font="$x2" layoutX="130.0" layoutY="290.0" text="Vorname" textFill="$x4" />
+                <Label font="$x1" layoutX="15.0" layoutY="490.0" text="Filiale:" />
+                <Label id="labelDepartment" fx:id="labelFiliale" font="$x2" layoutX="130.0" layoutY="490.0" text="Filiale" textFill="$x4" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Graphics">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <LineChart fx:id="lineChart" layoutX="0.0" layoutY="16.0" prefHeight="832.0" prefWidth="1259.0">
+                  <xAxis>
+                    <NumberAxis side="BOTTOM" />
+                  </xAxis>
+                  <yAxis>
+                    <NumberAxis side="LEFT" />
+                  </yAxis>
+                </LineChart>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</AnchorPane>
